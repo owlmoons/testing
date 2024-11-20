@@ -13,6 +13,17 @@ export const signupUser = async (credential,userName) => {
     return response.data;
 };
 
+// Function to get Google user information
+export const getGoogleUserInfo = async () => {
+    try {
+        const response = await axios.get(`${API_URL}/google-info`);
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching Google user info:", error);
+        throw error;
+    }
+};
+
 // Function to check if email exists
 export const checkEmailExists = async (email) => {
     const response = await axios.get(`${API_URL}/check-email/${email}`);
