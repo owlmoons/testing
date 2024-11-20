@@ -66,6 +66,7 @@ public class SecurityConfiguration {
         config.setAllowedOrigins(List.of("http://localhost:3000"));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE"));
         config.setAllowedHeaders(List.of("Authorization", "Content-Type", "auth_token"));
+        config.setExposedHeaders(List.of("Cross-Origin-Opener-Policy", "same-origin"));
         config.setAllowCredentials(true); 
         source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);
