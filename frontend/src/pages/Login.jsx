@@ -54,7 +54,7 @@ const Login = () => {
   };
 
   return (
-    <GoogleOAuthProvider>
+    <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
       <div className="container min-vh-100 d-flex justify-content-center align-items-center">
         <div
           className="card p-4 shadow-lg"

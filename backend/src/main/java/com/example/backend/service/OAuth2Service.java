@@ -4,8 +4,10 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken.Payload;
 import com.google.api.client.json.gson.GsonFactory;
+
+import io.github.cdimascio.dotenv.Dotenv;
+
 import com.google.api.client.http.javanet.NetHttpTransport;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -15,12 +17,12 @@ import java.util.Map;
 @Service
 public class OAuth2Service {
 
-    @Value("${spring.security.oauth2.client.registration.google.client-id}")
-    private String googleClientId;
-
     public Map<String, Object> decode(String credential) throws Exception {
+         Dotenv dotenv = Dotenv.configure().directory("backend").load();
+
+
         GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(new NetHttpTransport(), new GsonFactory())
-                .setAudience(Collections.singletonList(googleClientId))
+                .setAudience(Collections.singletonList(dotenv.get("SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GOOGLE_CLIENT_ID")))
                 .build();
     
         // Verify the ID token
